@@ -27,3 +27,11 @@ def vitamins_to_expire(date):
     cursor.execute(query, (date,))
     vitamins = cursor.fetchall()
     return vitamins
+
+
+def save_alternative(alternative):
+    query = ("INSERT INTO medicine_alternatives VALUES (null, %s, %s, %s, %s, %s, %s, %s)")
+    cursor = connection.cursor()
+    cursor.execute(query, (alternative["description"], alternative["is_antibiotic"], alternative["is_prescription_needed"],
+                           alternative["is_steroid"], alternative["name"], alternative["url_link"], alternative["medicine_id"],))
+    connection.commit()
