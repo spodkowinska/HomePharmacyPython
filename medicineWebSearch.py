@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
-import difflib
 import re
+import homePharmacyDB as db
 
 drug_to_search = "apap"
 drug_to_search_id = 1
@@ -90,7 +90,9 @@ def find_alternative_in_osoz(drug_to_search):
             alternative_json['is_antibiotic'] = find_is_antibiotic(url_link)
             alternative_json['is_steroid'] = find_is_steroid(url_link)
             alternative_json['is_prescription_needed'] = find_is_prescription_drug(link.get('href'))
+            alternative_json['medicine_id'] = drug_to_search_id
         print(alternative_json)
+        db.save_alternative(alternative_json)
 
 
 
@@ -138,7 +140,7 @@ def find_description(url_link):
 
 
 
-drug = "apap"
+drug = "nimesil"
 name = drug.strip().replace(" ", "-")
 url_link = f"https://baza-lekow.com.pl/{name}-lek-ulotka-chpl-opinie-dawkowanie/"
 # url_link ="https://ktomalek.pl/l/ulotka/sastium-tabl-powl-0-05-g-28-tabl/b-3194023"
