@@ -24,6 +24,7 @@ def find_name_and_email(user_id):
 def are_drugs_expired(date):
         return db.are_drugs_expired(date)
 
+# add link with possibility to remove out of date instance
 
 def create_out_of_date_mail():
     today = datetime.today()
@@ -63,3 +64,6 @@ def create_vitamins_mail():
                 name_and_email = find_name_and_email(int(vitamins_row[0]))
                 server.sendmail(model.sender_email, name_and_email[1], create_message_vitamins(name_and_email[0]
                             ,vitamins_row[1], vitamins_row[2]))
+
+def create_reminder_mail():
+    today = datetime.today()
